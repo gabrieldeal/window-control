@@ -27,11 +27,12 @@ Case Else
 EndSwitch
 
 Func Show($targetWindow)
-     WinActivate($targetWindow)
-
      Local $activeWindowPos = WinGetPos("[ACTIVE]")
-     ; FIXME: If there are no active windows.
-     WinMove($targetWindow, "", $activeWindowPos[0], $activeWindowPos[1]);
+     If @error == 0 Then
+	WinMove($targetWindow, "", $activeWindowPos[0], $activeWindowPos[1]);
+     EndIf
+
+     WinActivate($targetWindow)
 EndFunc
 
 Func Hide($targetWindow)
