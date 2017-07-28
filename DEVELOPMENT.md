@@ -3,6 +3,10 @@
  /cygdrive/c/Program\ Files/AutoIt3/AutoIt3.exe WindowControl.au3 show "Pomodoro Bash"
 ```
 
+```
+/cygdrive/c/Program\ Files\ \(x86\)/AutoIt3/Aut2Exe/Aut2exe /in SendToTray.au3  && ./SendToTray breakOver
+```
+
 # Releasing
 
 1. `git tag`

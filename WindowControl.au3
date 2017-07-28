@@ -1,4 +1,5 @@
 #include <Constants.au3>
+#include <Utils.au3>
 
 Local $usageMessage = "Usage: WindowControl COMMAND [ WINDOW_TITLE ]" & @CRLF & @CRLF & 'COMMAND: "show" or "hide"' & @CRLF
 If $CmdLine[0] == 0 Or $CmdLine[0] > 2 Then
@@ -37,9 +38,4 @@ EndFunc
 
 Func Hide($targetWindow)
      WinSetState($targetWindow, "", @SW_MINIMIZE)
-EndFunc
-
-Func Fail($message)
-   ConsoleWriteError($message)
-   Exit 1
 EndFunc
