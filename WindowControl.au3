@@ -1,41 +1,28 @@
 #include <Constants.au3>
 #include <Utils.au3>
+#include <Command/Tray/Start.au3>
+#include <Command/Tray/Update.au3>
+#include <Command/Tray/Close.au3>
+#include <Command/Window/Show.au3>
+#include <Command/Window/Hide.au3>
 
-Local $usageMessage = "Usage: WindowControl COMMAND [ WINDOW_TITLE ]" & @CRLF & @CRLF & 'COMMAND: "show" or "hide"' & @CRLF
-If $CmdLine[0] == 0 Or $CmdLine[0] > 2 Then
+Local $usageMessage = "Usage: WindowControl COMMAND [ COMMAND-SPECIFIC-PARAMETERS ]" & @CRLF & @CRLF & 'COMMAND: show, hide, startTray, updateTray, or closeTray.' & @CRLF
+If $CmdLine[0] == 0 Then
    Fail($usageMessage)
 EndIf
 Local $command = $CmdLine[1]
 
-Local $targetWindowTitle = "Pomodoro Bash"
-If $CmdLine[0] == 2 Then
-   $targetWindowTitle = $CmdLine[2]
-EndIf
-
-AutoItSetOption("WinTitleMatchMode", 3) ; Exact title match
-Local $targetWindow = WinGetHandle($targetWindowTitle)
-if @error Then
-   Fail("Could not find window with title '" & $targetWindowTitle & "'")
-EndIf
-
 Switch $command
 Case "show"
-     Show($targetWindow)
+     ShowWindow()
 Case "hide"
-     Hide($targetWindow)
+     HideWindow()
+Case "startTray"
+     StartTray()
+Case "updateTray"
+     UpdateTray()
+Case "closeTray"
+     CloseTray()
 Case Else
      Fail("Unknown command '" & $command & "'." & @CRLF & $usageMessage)
 EndSwitch
-
-Func Show($targetWindow)
-     Local $activeWindowPos = WinGetPos("[ACTIVE]")
-     If @error == 0 Then
-	WinMove($targetWindow, "", $activeWindowPos[0], $activeWindowPos[1]);
-     EndIf
-
-     WinActivate($targetWindow)
-EndFunc
-
-Func Hide($targetWindow)
-     WinSetState($targetWindow, "", @SW_MINIMIZE)
-EndFunc

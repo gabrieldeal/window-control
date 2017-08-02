@@ -2,43 +2,23 @@
 #include <GUIConstantsEx.au3>
 #include <WindowsConstants.au3>
 #include <SendMessage.au3>
-#include <Utils.au3>
+#include-once <../../Utils.au3>
 #include <Constants.au3>
 
-Main()
-
-Func Main()
+Func UpdateTray()
     If $CmdLine[0] <> 4 Then
-        Fail("Usage: Send TRAY_TITLE COMMAND MESSAGE ICON")
+	Fail("Usage: WindowControl updateTray TRAY_TITLE MESSAGE ICON")
     EndIf
 
-    Local $trayTitle = $CmdLine[1]
-    Local $command = $CmdLine[2]
+    Local $trayTitle = $CmdLine[2] & " Tray"
     Local $message = $CmdLine[3]
     Local $icon = $CmdLine[4]
 
-    Local $hWnd = GetTrayWindow($trayTitle)
-
-    Switch $command
-    Case "close"
-         WinClose($hWnd)
-    Case "message"
-         SendMessage($hWnd, $message, $icon)
-    Case Else
-         Fail("Unrecognized command: " & $command)
-    EndSwitch
+    Local $hWnd = GetWindowOrFail($trayTitle)
+    UpdateTray_SendMessage($hWnd, $message, $icon)
 EndFunc
 
-Func GetTrayWindow($trayTitle)
-    Local $hWnd = WinGetHandle($trayTitle)
-    If @error <> 0 Then
-       Fail("Could not find tray")
-    EndIf
-
-    Return $hWnd
-EndFunc
-
-Func SendMessage($hWnd, $message, $icon)
+Func UpdateTray_SendMessage($hWnd, $message, $icon)
     ; This is building a COPYDATASTRUCT as documented at
     ; https://msdn.microsoft.com/en-us/library/windows/desktop/ms649010(v=vs.85).aspx
 

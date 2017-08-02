@@ -5,3 +5,13 @@ Func Fail($message)
    ConsoleWriteError($message & @CRLF)
    Exit 1
 EndFunc
+
+Func GetWindowOrFail($trayTitle)
+    AutoItSetOption("WinTitleMatchMode", 3) ; Exact title match
+    Local $hWnd = WinGetHandle($trayTitle)
+    If @error <> 0 Then
+       Fail("Could not find window '" & $trayTitle & "'")
+    EndIf
+
+    Return $hWnd
+EndFunc
