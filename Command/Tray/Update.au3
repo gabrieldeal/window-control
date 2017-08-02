@@ -23,6 +23,7 @@ Func UpdateTray_SendMessage($hWnd, $message, $icon)
     ; https://msdn.microsoft.com/en-us/library/windows/desktop/ms649010(v=vs.85).aspx
 
     Local $lpDataStruct = DllStructCreate($TRAY_MESSAGE_STRUCT)
+    ; FIXME: Bounds check message & icon!
     DllStructSetData($lpDataStruct, "message", $message)
     DllStructSetData($lpDataStruct, "icon", $icon)
 
