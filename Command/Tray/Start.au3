@@ -56,7 +56,7 @@ Func StartTray_MY_WM_COPYDATA($hWnd, $Msg, $wParam, $lParam)
     Case $TRAY_UPDATE_MESSAGE_TYPE
 	StartTray_Update($icon, $message)
     Case Else
-	 Fail("Got unrecognized message type " & $messageType)
+	ConsoleWriteError("Got unrecognized message type " & $messageType)
     EndSwitch
 EndFunc
 
