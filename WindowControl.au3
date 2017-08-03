@@ -1,3 +1,5 @@
+#NoTrayIcon
+
 #include <Constants.au3>
 #include <Utils.au3>
 #include <Command/Tray/DisplayNotification.au3>
