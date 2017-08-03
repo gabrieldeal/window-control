@@ -38,7 +38,6 @@ EndFunc
 Func StartTray_Update($icon, $message)
     TraySetIcon($icon)
     TraySetToolTip($message)
-    TrayTip($TRAY_TITLE, $message, 5)
 EndFunc
 
 Func StartTray_MY_WM_COPYDATA($hWnd, $Msg, $wParam, $lParam)
@@ -46,9 +45,18 @@ Func StartTray_MY_WM_COPYDATA($hWnd, $Msg, $wParam, $lParam)
     Local $lpData = DllStructGetData($copydataStruct, "lpData")
 
     Local $lpDataStruct = DllStructCreate($TRAY_MESSAGE_STRUCT, $lpData)
+    Local $messageType = DllStructGetData($lpDataStruct, "messageType")
     Local $message = DllStructGetData($lpDataStruct, "message")
     Local $icon = DllStructGetData($lpDataStruct, "icon")
 
-    StartTray_Update($icon, $message)
+    Switch $messageType
+    Case $TRAY_DISPLAY_NOTIFICATION_MESSAGE_TYPE
+	StartTray_Update($icon, $message)
+	TrayTip($TRAY_TITLE, $message, 5)
+    Case $TRAY_UPDATE_MESSAGE_TYPE
+	StartTray_Update($icon, $message)
+    Case Else
+	 Fail("Got unrecognized message type " & $messageType)
+    EndSwitch
 EndFunc
 

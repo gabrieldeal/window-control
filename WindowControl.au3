@@ -1,5 +1,6 @@
 #include <Constants.au3>
 #include <Utils.au3>
+#include <Command/Tray/DisplayNotification.au3>
 #include <Command/Tray/Start.au3>
 #include <Command/Tray/Update.au3>
 #include <Command/Tray/Close.au3>
@@ -17,6 +18,8 @@ Case "show"
      ShowWindow()
 Case "hide"
      HideWindow()
+Case "displayTrayNotification"
+     DisplayTrayNotification()
 Case "startTray"
      StartTray()
 Case "updateTray"
