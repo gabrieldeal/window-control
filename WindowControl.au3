@@ -2,6 +2,7 @@
 
 #include <Constants.au3>
 #include <Utils.au3>
+#include <Command/PlayAudio.au3>
 #include <Command/Tray/DisplayNotification.au3>
 #include <Command/Tray/Start.au3>
 #include <Command/Tray/Update.au3>
@@ -9,7 +10,7 @@
 #include <Command/Window/Show.au3>
 #include <Command/Window/Hide.au3>
 
-Local $usageMessage = "Usage: WindowControl COMMAND [ COMMAND-SPECIFIC-PARAMETERS ]" & @CRLF & @CRLF & 'COMMAND: show, hide, startTray, updateTray, or closeTray.' & @CRLF
+Local $usageMessage = "Usage: WindowControl COMMAND [ COMMAND-SPECIFIC-PARAMETERS ]" & @CRLF & @CRLF & 'COMMAND: show, hide, playAudio, startTray, updateTray, or closeTray.' & @CRLF
 If $CmdLine[0] == 0 Then
    Fail($usageMessage)
 EndIf
@@ -20,6 +21,8 @@ Case "show"
      ShowWindow()
 Case "hide"
      HideWindow()
+Case "playAudio"
+     PlayAudio()
 Case "displayTrayNotification"
      DisplayTrayNotification()
 Case "startTray"
