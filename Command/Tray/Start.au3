@@ -7,12 +7,12 @@ Local $TRAY_TITLE
 
 Func StartTray()
     If $CmdLine[0] <> 4 Then
-	Fail("Usage: WindowControl startTray TITLE INITIAL_ICON INITIAL_MESSAGE")
+        Fail("Usage: WindowControl startTray TITLE INITIAL_MESSAGE INITIAL_ICON")
     EndIf
 
     $TRAY_TITLE = $CmdLine[2]
-    Local $initialIcon = $CmdLine[3]
-    Local $initialMessage = $CmdLine[4]
+    Local $initialMessage = $CmdLine[3]
+    Local $initialIcon = $CmdLine[4]
 
     Local $trayTitle = $TRAY_TITLE & " Tray"
     GUICreate($trayTitle)
